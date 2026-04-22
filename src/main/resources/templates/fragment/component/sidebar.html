@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<!-- 가계부 페이지 사이드바 -->
+	<aside class="app-left" th:fragment="ASSET_SIDEBAR">
+		<div class="app-sidebar">
+			<div class="sidebar-top">
+				<a href="#" class="app-logo">
+					<img src="/images/mainlogo.png">
+				</a>
+				<div class="sidebar-toggle" id="sidebarClose">
+					<svg th:replace="~{fragment/svg/svg :: sidebarClose}"></svg>
+				</div>
+			</div>
+			<div class="sidebar-group">
+				<span class="sidebar-label">Workspace</span>
+				<div class="sidebar-items">
+					<div class="sidebar-item" data-sidebar="ledger">
+						<div class="sidebar-item-left">
+							<svg th:replace="~{fragment/svg/svg :: dashboard}"></svg>
+							<span>가계부</span>
+						</div>
+						<svg th:replace="~{fragment/svg/svg :: sidebarArrowUp}"></svg>
+					</div>
+					<div class="sidebar-item-accordion" data-sidebar-family="ledger">
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/dashboard">
+								<span>대시보드</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/create">
+								<span>가계부 생성</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/category">
+								<span>카테고리 관리</span>
+							</a>
+						</div>
+					</div>
+					
+					<div class="sidebar-item" data-sidebar="transaction">
+						<div class="sidebar-item-left">
+							<svg th:replace="~{fragment/svg/svg :: dashboard}"></svg>
+							<span>거래내역</span>
+						</div>
+						<svg th:replace="~{fragment/svg/svg :: sidebarArrowUp}"></svg>              
+					</div>
+					<div class="sidebar-item-accordion" data-sidebar-family="transaction">
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/detail/recent-transaction">
+								<span>거래 내역 조회</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/detail/c">
+								<span>카테고리별 내역</span>
+							</a>
+						</div>
+					</div>
+					
+					<div class="sidebar-item" data-sidebar="finance-state">
+						<div class="sidebar-item-left">
+							<svg th:replace="~{fragment/svg/svg :: dashboard}"></svg>
+							<span>자산현황</span>
+						</div>
+						<svg th:replace="~{fragment/svg/svg :: sidebarArrowUp}"></svg>              
+					</div>
+					<div class="sidebar-item-accordion" data-sidebar-family="finance-state">
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/report/financeState">
+								<span>자산현황</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/report/financeState">
+								<span>재무상태표</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/detail/c">
+								<span>자산흐름표</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/detail/c">
+								<span>현금흐름표</span>
+							</a>
+						</div>
+					</div>
+					
+					<div class="sidebar-item" data-sidebar="report">
+						<div class="sidebar-item-left">
+							<svg th:replace="~{fragment/svg/svg :: dashboard}"></svg>
+							<span>리포트</span>
+						</div>
+						<svg th:replace="~{fragment/svg/svg :: sidebarArrowUp}"></svg>              
+					</div>
+					<div class="sidebar-item-accordion" data-sidebar-family="report">
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/report/financeState">
+								<span>기간 비교 리포트</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/report/financeState">
+								<span>수익/비용 리포트</span>
+							</a>
+						</div>
+						<div class="sidebar-accordion-item">
+							<a href="/ledger/detail/c">
+								<span>예산 리포트</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+	
+	<!-- 마이페이지 사이드바 -->
+	<aside class="app-left" th:fragment="MYPAGE_SIDEBAR">
+		<div class="app-sidebar">
+			<div class="sidebar-top">
+				<a href="#" class="app-logo"><img src="/images/mainlogo.png"></a>
+				<div class="sidebar-toggle" id="sidebarClose"><svg th:replace="~{fragment/svg/svg :: sidebarClose}"></svg></div>
+			</div>
+			<div class="sidebar-group">
+				<span class="sidebar-label">Workspace</span>
+				<div class="sidebar-items">
+					<div class="sidebar-item active">
+						<div class="sidebar-item-left">
+							<span>마이페이지</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+</body>
+</html>

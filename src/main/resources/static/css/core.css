@@ -1,0 +1,124 @@
+/* Token */
+@import url(./token/color.css);
+@import url(./token/display.css);
+
+/* Component */
+@import url(./component/controlbar.css);
+@import url(./component/button.css);
+@import url(./component/dropdown.css);
+@import url(./component/card.css);
+@import url(./component/icon.css);
+@import url(./component/modal.css);
+@import url(./component/input.css);
+@import url(./component/toggle.css);
+@import url(./component/object-banner.css);
+@import url(./component/badge.css);
+@import url(./component/datepicker.css);
+@import url(./component/table.css);
+
+/* Utilities */
+@import url(./utilities/display.css);
+@import url(./utilities/container.css);
+
+/* Project */
+@import url(./app.css);
+
+/* font */
+@import url(./fonts/font.css);
+
+/* layout */
+@import url(./layout/mypage.css);
+@import url(./layout/mobile.css);
+@import url(./layout/ledger.css);
+
+*, *::after, *::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  min-height: 100%;
+  transition: background var(--transition);
+  background-color: var(--color-bg);
+  background-image: var(--color-bg-gradient);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+img, svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+svg {
+  pointer-events: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.relative:hover .tooltip {
+	display: block;
+}
+
+.tooltip {
+	display: none;
+	position: absolute;
+	padding: var(--padding-s) var(--padding-m);
+	color: #333;
+	background-color: lightgray;
+	font-size: var(--font-size-caption-s);
+	font-weight: bold;
+	white-space: nowrap;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: var(--radius-s);
+	z-index: var(--z-sticky);
+}
+
+.tooltip-box {
+	cursor: pointer;
+	border-radius: var(--radius-s);
+}
+.tooltip-box:hover {
+	background-color: var(--color-bg-inner-hover);
+}
+
+.tooltip.top {
+	bottom: calc(100% + 6px);
+}
+
+.tooltip.bottom {
+	top: calc(100% + 6px);
+}
+
+.tooltip.top::before {
+	content: '';
+	position: absolute;
+	
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	
+	border-width: 6px;
+	border-style: solid;
+	border-color: lightgray transparent transparent transparent;
+}
+
+.tooltip.bottom::before {
+	content: '';
+	position: absolute;
+	
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent transparent lightgray transparent;
+}

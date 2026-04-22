@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/core.css">
+	<script src="/js/util/easyplan-utilities.js"></script>
+	<title>Easyplan</title>
+</head>
+<body>
+	<script src="/js/ledger/ledger-modal-html.js"></script>
+	<div class="toast"></div>
+	<!-- app start -->
+	<div class="app">
+		<aside th:replace="~{fragment/component/sidebar :: ASSET_SIDEBAR}"></aside>
+		<div class="app-right">
+			<div th:replace="~{fragment/component/topbar :: MAIN_TOPBAR}"></div>
+			<div class="main">
+				<div class="content-wrapper content9-3">
+					<div class="content-flex content-flex-col app-container">
+						<div class="object-banner">
+							<div class="banner-in-object large" style="top: -30%; left: 0;"></div>
+							<div class="banner-in-object" style="top: -30%; left: 25%;"></div>
+							<div class="banner-in-object" style="top: 30%; left: 15%;"></div>
+							<div class="banner-in-object large" style="top: 60%; left: 45%;"></div>
+							<div class="banner-in-object large" style="bottom: -30%; right: 0;"></div>
+							<div class="banner-in-object large" style="bottom: 10%; right: 15%;"></div>
+							<div class="banner-in-object" style="top: -30%; right: 25%;"></div>
+							<span class="fs-banner-title">나만의 새로운 가계부</span>
+							<span>Easyplan과 함께 스마트한 자산 관리를 시작해보세요.</span>
+						</div>
+						<div class="container">
+							<div class="container-header">
+								<div class="container-header-icon">
+									<svg th:replace="~{fragment/svg/svg :: filePlus}"></svg>
+								</div>
+								<span>새 가계부 등록</span>
+							</div>
+							<div class="line"></div>
+							<div class="container-content1-1">
+								<div class="flex-col gap-m p-m">
+									<div class="input-group">
+										<span>가계부 이름</span>
+										<input type="text" id="ledgerName">
+									</div>
+									<div class="input-group">
+										<span>가계부 설명</span>
+										<textarea class="textarea-s" id="ledgerDescription"></textarea>
+									</div>
+									<div class="input-group">
+										<span>가계부 유형</span>
+										<div class="grid-cols-2 gap-m">
+											<button class="container-btn active" data-value="PERSONAL">개인 가계부</button>
+											<button class="container-btn" data-value="GROUP">공유 가계부</button>
+										</div>									
+									</div>
+								</div>
+								<div class="flex-col gap-m p-m">
+									<div class="input-group">
+										<span>기본 카테고리</span>
+										<div class="flex-col gap-m main-border bg-surface round-m">
+											<div class="flex-col gap-m">
+												<div class="fs-caption fc-caption p-m flex gap-m items-center between">
+													<div class="flex gap-m items-center">
+														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+															<path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path>
+														</svg>
+														<span>선택한 카테고리가<br>표시됩니다.</span>
+													</div>
+													<button class="btn btn-info" id="categoryChoice">
+														<svg th:replace="~{fragment/svg/svg :: menuAdd}"></svg>
+														<span>카테고리 설정</span>
+													</button>
+												</div>
+												<div class="flex flex-wrap gap-m p-m w-full items-center" data-block="category" style="min-height: 5rem;"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container-action">
+								<button class="btn btn-primary" id="ledgerCreate">가계부 생성</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-overlay">
+		<div class="modal" tabindex="-1"></div>
+	</div>
+	<script src="/js/modal.js"></script>
+	<script src="/js/ledger/ledger-create.js"></script>
+	<script src="/js/theme.js"></script>
+	<script src="/js/app.js"></script>
+</body>
+</html>

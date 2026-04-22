@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<!-- BASE TOPBAR -->
+	<header class="app-topbar" th:fragment="MAIN_TOPBAR">
+	  <div class="topbar-left">
+	    <div class="sidebar-toggle disabled" id="sidebarOpen">
+	      <svg th:replace="~{fragment/svg/svg :: sidebarOpen}"></svg>
+	    </div>
+	    <div class="user-profile">
+	    	<div class="profile-image">
+	    		<img src="/images/pngwing.com.png">
+	    	</div>
+	    	<span th:text="${user} + ' 님'"></span>
+	    </div>
+	  </div>
+	  <div class="topbar-right">
+	    <div class="icon-box relative" data-event="topbar-dropdown">
+	      <div class="icon action" data-icon="notification">
+	        <svg th:replace="~{fragment/svg/svg :: notification}"></svg>
+	      </div>
+	      <div class="icon action" data-icon="app">
+	        <svg th:replace="~{fragment/svg/svg :: topbarMenu}"></svg>
+	      </div>
+	      <div class="icon action" data-icon="theme"></div>
+	      <div class="icon action" data-icon="menu">
+	      	<svg th:replace="~{fragment/svg/svg :: menu}"></svg>
+	      	<div class="dropdown right">
+	      		<div class="dropdown-item">
+	      			<a href="#">
+		      			<svg th:replace="~{fragment/svg/svg :: user}"></svg>
+		      			<span>마이페이지</span>	      				
+	      			</a>
+	      		</div>
+	      		<div class="dropdown-item">
+	      			<a href="/user/my">
+		      			<svg th:replace="~{fragment/svg/svg :: userSetting}"></svg>
+		      			<span>계정설정</span>
+	      			</a>
+	      		</div>
+	      		<div class="dropdown-line"></div>
+	      		<div class="dropdown-item">
+	      			<a href="#">
+		      			<svg th:replace="~{fragment/svg/svg :: logout}"></svg>
+		      			<span>로그아웃</span>
+	      			</a>
+	      		</div>
+	      	</div>
+	      </div>
+	    </div>
+	  </div>
+	</header>
+	
+	<!-- Mypage Topbar -->
+	<header class="app-topbar" th:fragment="MYPAGE_TOPBAR">
+		<div class="mypage-topbar">
+			<div class="topbar-left">
+				<a href="/user/home">
+					<img src="/images/sublogo.png">
+				</a>
+		  </div>
+		  <div class="topbar-right">
+		    <div class="icon-box relative" data-event="topbar-dropdown">
+		      <div class="icon action" data-icon="notification">
+		        <svg th:replace="~{fragment/svg/svg :: notification}"></svg>
+		      </div>
+		      <div class="icon action" data-icon="app">
+		        <svg th:replace="~{fragment/svg/svg :: topbarMenu}"></svg>
+		      </div>
+		      <div class="icon action" data-icon="theme"></div>
+		      <div class="icon action" data-icon="menu">
+		      	<svg th:replace="~{fragment/svg/svg :: menu}"></svg>
+		      	<div class="dropdown right">
+		      		<div class="dropdown-item">
+		      			<a href="#">
+			      			<svg th:replace="~{fragment/svg/svg :: user}"></svg>
+			      			<span>마이페이지</span>
+		      			</a>
+		      		</div>
+		      		<div class="dropdown-item">
+		      			<a href="#">
+			      			<svg th:replace="~{fragment/svg/svg :: userSetting}"></svg>
+			      			<span>계정설정</span>
+		      			</a>
+		      		</div>
+		      		<div class="dropdown-line"></div>
+		      		<div class="dropdown-item">
+		      			<a href="#">
+			      			<svg th:replace="~{fragment/svg/svg :: logout}"></svg>
+			      			<span>로그아웃</span>
+		      			</a>
+		      		</div>
+		      	</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</header>
+</body>
+</html>

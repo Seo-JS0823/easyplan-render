@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>EasyPlan - 가계부 등록 배너</title>
+    <style>
+        /* 1. 배너 기본 컨테이너 */
+.easyplan-hero-banner {
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(135deg, #f06292 0%, #ec407a 100%); /* 이지플랜 시그니처 핑크 계열 */
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -50px; /* 입력 폼과 겹치게 하기 위한 마진 */
+    box-shadow: 0 20px 40px rgba(233, 30, 99, 0.2);
+}
+
+/* 2. 텍스트 콘텐츠 스타일 */
+.hero-content {
+    text-align: center;
+    color: #ffffff;
+    z-index: 10;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+    margin: 0;
+}
+
+/* 3. 떠다니는 3D 오브젝트 (이모지 활용) */
+.floating-obj {
+    position: absolute;
+    font-size: 4.5rem;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.15)) blur(0.5px);
+    user-select: none;
+    opacity: 0.4;
+}
+
+/* 개별 오브젝트 위치 및 애니메이션 */
+.obj-1 { top: 10%; left: 8%; transform: rotate(-15deg); animation: float 6s infinite ease-in-out; }
+.obj-2 { bottom: 15%; right: 10%; font-size: 5.5rem; transform: rotate(12deg); animation: float 8s infinite ease-in-out; }
+.obj-3 { top: 20%; right: 12%; font-size: 3.5rem; opacity: 0.2; animation: float 7s infinite ease-in-out; }
+.obj-4 { bottom: 20%; left: 15%; font-size: 2.5rem; opacity: 0.3; animation: float 5s infinite ease-in-out; }
+
+/* 4. [핵심] 지리는 플로팅 애니메이션 */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* 5. 모바일 대응 */
+@media (max-width: 768px) {
+    .easyplan-hero-banner { height: 200px; }
+    .hero-title { font-size: 1.6rem; }
+    .hero-subtitle { font-size: 0.9rem; }
+    .floating-obj { font-size: 3rem; }
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="easyplan-hero-banner">
+    <div class="floating-obj obj-1">💰</div>
+    <div class="floating-obj obj-2">💳</div>
+    <div class="floating-obj obj-3">📊</div>
+    <div class="floating-obj obj-4">✨</div>
+
+    <div class="hero-content">
+        <h1 class="hero-title">나만의 새로운 가계부</h1>
+        <p class="hero-subtitle">이지플랜과 함께 스마트한 자산 관리를 시작해보세요.</p>
+    </div>
+</div>
+
+</body>
+</html>

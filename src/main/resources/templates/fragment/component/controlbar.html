@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<!-- ASSET_Control bar -->
+	<div class="control-bar" th:fragment="ASSET_CONTROL_BAR">
+	  <div class="control-group">
+	    <div class="dropdown-wrapper">
+	      <div class="dropdown-trigger">
+	        <span class="dropdown-text">내 가계부</span>
+	        <svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+	        <div class="dropdown">
+	          <span data-value="1">내 가계부</span>
+	          <span data-value="2">공유 가계부</span>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <button class="btn btn-primary-reverse">
+	      <svg th:replace="~{fragment/svg/svg :: addPen}"></svg>
+	      <span>항목 생성</span>
+	    </button>
+	    <button class="btn btn-primary">
+	      <svg th:replace="~{fragment/svg/svg :: addPen}"></svg>
+	      <span>거래작성</span>
+	    </button>
+	  </div>
+	</div>
+	
+	<!-- MYPAGE_Control bar -->
+	<div class="control-bar" th:fragment="MYPAGE_CONTROL_BAR">
+		<div class="control-group">
+			
+		</div>
+		<div class="control-group">
+			<button class="btn btn-info">친구찾기</button>
+			<button class="btn btn-primary">비밀번호 변경</button>
+		</div>
+	</div>
+</body>
+</html>

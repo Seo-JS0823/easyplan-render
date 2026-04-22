@@ -1,0 +1,83 @@
+.object-banner {
+	width: 100%;
+	height: 120px;
+	background-image: linear-gradient(
+		135deg,
+		var(--color-brand),
+		color-mix(in srgb, var(--color-brand), lightgray 20%),
+		color-mix(in srgb, var(--color-brand), var(--color-info) 40%));
+		
+	border-radius: var(--radius-m);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #efefef;
+	font-size: 1rem;
+	position: relative;
+	overflow: hidden;
+	margin-top: var(--margin-m);
+}
+
+.banner-in-object {
+	position: absolute;
+	border-radius: 9999px;
+	filter: blur(3px);
+	opacity: 0.2;
+	width: 4rem;
+	height: 4rem;
+	transform: rotate(-45deg);
+	background: linear-gradient(to right, white, color-mix(in srgb, var(--color-info), transparent 50%));
+	z-index: 1;
+	filter: blur(3px);
+}
+.banner-in-object.large {
+	width: 6rem;
+	height: 6rem;
+}
+
+.fs-banner-title {
+	font-size: 1.4rem;
+	font-family: var(--font-banner);
+	text-shadow: 0 0 1px white;
+}
+
+@media (min-width: 350px) {
+	.object-banner {
+		font-size: 0.8rem;
+		height: 75px;
+	}
+	.fs-banner-title {
+		font-size: 1.2rem;
+	}
+	
+	.banner-in-object {
+		width: 2rem;
+		height: 2rem;
+	}
+	
+	.banner-in-object.large {
+		width: 3rem;
+		height: 3rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.object-banner {
+		font-size: 1rem;
+		height: 120px;
+	}
+	.fs-banner-title {
+		font-size: 1.4rem;
+	}
+	
+	.banner-in-object {
+		width: 4rem;
+		height: 4rem;
+	}
+	
+	.banner-in-object.large {
+		width: 6rem;
+		height: 6rem;
+	}
+}

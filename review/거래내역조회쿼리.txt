@@ -1,0 +1,152 @@
+@Override
+	public JournalThumbTransactionScroll findJournalThumbTransactionsNoFilter
+		(Long ledgerId, LocalDate startDate, LocalDate endDate, int offset, SearchOptions searchOption, SortedOptions sortedOption) {
+		
+		TODO: 나중에 프론트에서 사용자가 pageSize를 직접 선택할 수 있을 때 파라미터로 전환
+		 
+		int pageSize = 30;
+		
+		QJournalEntity journal = QJournalEntity.journalEntity;
+		QEntryLineEntity entryLine = QEntryLineEntity.entryLineEntity;
+    QAccountEntity account = QAccountEntity.accountEntity;
+    QCategoryEntity category = QCategoryEntity.categoryEntity;
+    QCategoryOptionEntity categoryOption = QCategoryOptionEntity.categoryOptionEntity;
+    
+    var idQuery = qf.select(journal.id, journal.transactionDate).from(journal);
+    
+    JOIN_NEED_LIST 에서 FIXED 제외한 모든 조회 옵션은
+    journal.entryLines -> EntryLineEntity
+    entryLine.account  -> AccountEntity
+    account.category   -> CategoryEntity
+    의 Join을 필요로 함
+    
+    FIXED (고정거래) 옵션의 경우에만
+    CategoryOptionEntity가 필요하므로 조건문에서 설정함.
+    
+    if(isSearchOptionJoinNeed(searchOption)) {
+    	idQuery.leftJoin(journal.entryLines, entryLine)
+    	       .leftJoin(entryLine.account, account)
+    	       .leftJoin(account.category, category);
+    	       
+    	if(searchOption == SearchOptions.FIXED) {
+    		idQuery.leftJoin(account.categoryOption, categoryOption);    		
+    	}
+    }
+    
+    limit에 +1의 이유는 프론트쪽 페이징 방식이 더보기(LoadMore) 방식이라서
+    다음 데이터가 존재하는지 여부만 알면되기 때문에 + 1 연산으로 동작
+    
+    fetch(); 까지는 List<Tuple>을 반환함 -> select 절에서 id, transactionDate로 했기 때문에
+    List<Long>으로 받기 위해서는 stream 호출해서 transactionDate는 버리고 id로만 다시 List로 생성함
+    
+    List<Long> ids = idQuery
+    		.where(
+    				journal.ledger.id.eq(ledgerId),
+    				journal.transactionDate.between(startDate, endDate),
+    				eqSearchOption(searchOption, journal, category, categoryOption)
+    		)
+    		.distinct()
+    		.orderBy(getOrderOption(sortedOption, journal))
+    		.offset(offset)
+    		.limit(pageSize + 1)
+    		.fetch().stream()
+    			.map(tp -> tp.get(journal.id))
+    			.toList();
+    		
+		
+    if(ids.isEmpty()) {
+    	return new JournalThumbTransactionScroll(Collections.emptyList(), false, offset);
+    }
+    
+    boolean next = ids.size() > pageSize;
+    List<Long> fetchIds = next ? ids.subList(0, pageSize) : ids;
+    
+    List<JournalEntity> journalList = qf
+    		.selectFrom(journal)
+    		.leftJoin(journal.entryLines, entryLine).fetchJoin()
+    		.leftJoin(entryLine.account, account).fetchJoin()
+    		.leftJoin(account.category, category).fetchJoin()
+    		.where(journal.id.in(fetchIds))
+    		.orderBy(getOrderOption(sortedOption, journal))
+    		.fetch();
+    
+    List<JournalThumbTransaction> journalTransactionList = journalList.stream()
+    		.distinct()
+    		.map(jo -> new JournalThumbTransaction(
+    				jo.getId(),
+    				jo.getTransactionDate(),
+    				jo.getTotalAmount(),
+    				jo.getMemo(),
+    				jo.getEntryLines().stream()
+    						.map(line -> new JournalThumbTransaction.AccountSideInfo(
+    								line.getAccount().getAccountName(),
+    								line.getAccount().getCategory().getType(),
+    								line.getType()
+    				))
+    				.toList()
+    		))
+    		.toList();
+    
+    return new JournalThumbTransactionScroll(journalTransactionList, next, offset + pageSize);
+	}
+	
+	private OrderSpecifier<?>[] getOrderOption(SortedOptions option, QJournalEntity journal) {
+    if (option == null) return new OrderSpecifier[]{journal.transactionDate.desc(), journal.id.desc()};
+
+    return switch (option) {
+        case OLDEST -> new OrderSpecifier[]{journal.transactionDate.asc(), journal.id.asc()};
+        case HIGH_PRICE -> new OrderSpecifier[]{journal.totalAmount.desc(), journal.id.desc()};
+        case LOW_PRICE -> new OrderSpecifier[]{journal.totalAmount.asc(), journal.id.asc()};
+        default -> new OrderSpecifier[]{journal.transactionDate.desc(), journal.id.desc()};
+    };
+}
+
+	private BooleanExpression eqSearchOption(
+			SearchOptions option, 
+	    QJournalEntity journal, 
+	    QCategoryEntity category, 
+	    QCategoryOptionEntity categoryOption
+	) {
+		
+    if (option == null || option == SearchOptions.ALL) return null;
+
+    return switch (option) {
+        case TRANSACTION_INCOME -> journal.transactionType.eq(TransactionType.INCOME);
+        case TRANSACTION_EXPENSE -> journal.transactionType.eq(TransactionType.EXPENSE);
+        case TRANSACTION_TRANSFER -> journal.transactionType.eq(TransactionType.TRANSFER);
+
+        case ASSET -> category.type.eq(AccountType.ASSET);
+        case LIABILITIES -> category.type.eq(AccountType.LIABILITIES);
+        case EQUITY -> category.type.eq(AccountType.EQUITY);
+        case INCOME -> category.type.eq(AccountType.INCOME);
+        case EXPENSE -> category.type.eq(AccountType.EXPENSE);
+        
+        case FIXED -> categoryOption.optionCode.in("FIXED_INCOME", "FIXED_EXPENSE");
+        
+        default -> null;
+    };
+	}
+
+	private boolean isSearchOptionJoinNeed(SearchOptions option) {
+		if(option == null) return false;
+		return JOIN_NEED_LIST.contains(option);
+	}
+	
+해당 쿼리의 문제점
+
+1차 쿼리에서 JOIN + DISTINCT + ORDER BY + OFFSET + LIMIT 를 같이 쓰고 있으며
+2차 쿼리에서 1:N Fetch Join을 다시 타기 때문에 페이지 크기 30 자체는 작아도
+정렬/중복제거/건너뛰기 비용이 누적되면 느려질 가능성이 높음
+
+이 방식의 동작은
+1. JournalEntity 기준으로 후보를 찾고
+2. 필요하면 EntryLine/Account/Category/CategoryOption 까지 조인할 수 있고
+3. DISTINCT로 JournalEntity의 중복을 제거하고
+4. 정렬 후 OFFSET 만큼 건너뛰어 31개를 가져온 후
+5. 그 ID들로 다시 Fetch Join 조회를 함.
+
+이 방식의 장점은 컬렉션 Fetch Join + Pagination을 한 방에 하지 않아서
+Hibernate가 경고하는 페이징을 DB에서 못 자르고 메모리에서 잘라야 하는 상황은 피함
+
+반면 OFFSET은 뒤로 갈수록 앞 행들을 계속 계산하고 버려야 해서 큰 OFFSET 에서는 비효율적이고
+PostgreSQL 공식 문서도 큰 OFFSET은 비효율적일 수 있다고 말하고 있다.

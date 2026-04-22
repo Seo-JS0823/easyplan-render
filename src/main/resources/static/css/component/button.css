@@ -1,0 +1,131 @@
+:root, :root[data-theme=light] {
+  /* height */
+  --btn-height-s: 2rem;
+  --btn-height-m: 2.25rem;
+  --btn-height-l: 2.5rem;
+
+  /* padding */
+  --btn-padding-s: 0 8px;
+  --btn-padding-m: 0 12px;
+  --btn-padding-l: 0 16px;
+
+  /* 행위별 버튼 색상 */
+  --btn-color-default: var(--color-neutral);
+  --btn-color-primary: var(--color-brand);
+  
+}
+
+.btn {
+  height: var(--btn-height-m);
+  padding: var(--btn-padding-m);
+  outline: none;
+  border: none;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  background: transparent;
+  font-family: var(--font-component);
+  font-size: var(--font-size-caption-m);
+  border: 2px solid var(--btn-color-default);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.btn.small {
+	height: var(--btn-height-s);
+	padding: var(--btn-padding-s);
+	font-size: var(--font-size-caption-s);
+}
+
+.btn.center {
+  justify-content: center;
+}
+
+.btn.btn-asset {
+	background-color: var(--color-asset);
+	color: white;
+	border: none;
+}
+
+.btn.btn-liabilities {
+	background-color: var(--color-liabilities);
+	color: white;
+	border: none;
+}
+
+.btn.btn-income {
+	background-color: var(--color-income);
+	color: white;
+	border: none;
+}
+
+.btn.btn-expense {
+	background-color: var(--color-expense);
+	color: white;
+	border: none;
+}
+
+.btn.btn-primary {
+  background-color: var(--btn-color-primary);
+  color: white;
+  border: none;
+}
+
+.btn.btn-primary-reverse {
+  background: transparent;
+  color: var(--btn-color-primary);
+  border: 2px solid var(--btn-color-primary);
+  font-weight: 500;
+}
+
+.btn.btn-info {
+	background-color: var(--color-info);
+	color: white;
+	border: none;
+}
+
+.btn.btn-success {
+	background-color: var(--color-success);
+	color: white;
+	border: none;	
+}
+
+.btn.btn-neutral {
+  background-color: var(--btn-color-default);
+  color: white;
+  border: none;
+}
+
+.btn.radio {
+  border: 1px solid var(--color-border);
+}
+
+.btn.radio:hover {
+  border: 1px solid var(--color-brand);
+}
+
+.btn.radio.active {
+  border: none;
+  color: white;
+  background-color: var(--color-brand);
+}
+
+.container-btn {
+	border: 1px solid var(--color-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--input-bg);
+	color: var(--color-text);
+	padding: var(--padding-m);
+	border-radius: var(--radius-m);
+	cursor: pointer;
+	font-size: var(--font-size-body);
+}
+.container-btn.active {
+	color: white;
+	background-color: #6365ed;
+	border: none;
+}

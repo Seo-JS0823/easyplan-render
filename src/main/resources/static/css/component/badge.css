@@ -1,0 +1,87 @@
+:root, :root[data-theme=light] {
+	--badge-bg-asset: #6395ed;
+	--badge-bg-liabilities: #DDA0DD;
+	--badge-bg-income: #3CB371;
+	--badge-bg-expense: #CD5C5C;
+}
+
+.badge {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--padding-m) var(--padding-l);
+	color: white;
+	flex: 0 0 auto;
+	border-radius: 12px;
+	font-size: var(--font-size-caption-m);
+	position: relative;
+	cursor: default;
+}
+
+.ball {
+	width: 16px;
+	height: 16px;
+	align-self: center;
+	border-radius: 50%;
+}
+.ball.asset {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-asset), color-mix(in srgb, var(--badge-bg-asset), blue 70%));
+}
+.ball.liabilities {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-liabilities), color-mix(in srgb, var(--badge-bg-liabilities), blue 70%));
+}
+.ball.income {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-income), color-mix(in srgb, var(--badge-bg-income), #006400 70%));
+}
+.ball.expense {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-expense), color-mix(in srgb, var(--badge-bg-expense), #B22222 70%));
+}
+
+.badge.asset {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-asset), color-mix(in srgb, var(--badge-bg-asset), blue 70%));
+}
+
+.badge.liabilities {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-liabilities), color-mix(in srgb, var(--badge-bg-liabilities), blue 70%));
+}
+
+.badge.income {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-income), color-mix(in srgb, var(--badge-bg-income), #006400 70%));
+}
+
+.badge.expense {
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.24)),
+	linear-gradient(135deg, var(--badge-bg-expense), color-mix(in srgb, var(--badge-bg-expense), #B22222 70%));
+}
+
+.badge[data-type=PERSONAL] {
+	background-color: #4169E1;
+	padding: 0.5rem 0.8rem;
+	border-radius: var(--radius-s);
+}
+.badge[data-type=GROUP] {
+	background-color: #8A2BE2;
+	padding: 0.5rem 0.8rem;
+	border-radius: var(--radius-s);
+}
+
+@media (min-width: 350px) {
+	.ball {
+		width: 12px;
+		height: 12px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.ball {
+		width: 16px;
+		height: 16px;
+	}
+}

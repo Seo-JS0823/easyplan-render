@@ -1,0 +1,19 @@
+@media (min-width: 350px) {
+	.mb-jus-around-pc-start {
+		justify-content: space-around;
+	}
+	
+	.mb-jus-between-pc-start {
+		justify-content: space-between;
+	}
+}
+
+@media (min-width: 1024px) {
+	.mb-jus-around-pc-start {
+		justify-content: flex-start;
+	}
+	
+	.mb-jus-between-pc-start {
+		justify-content: flex-start;
+	}
+}

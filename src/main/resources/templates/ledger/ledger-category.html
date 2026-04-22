@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/core.css">
+	<script src="/js/util/easyplan-utilities.js"></script>
+	<title>Easyplan</title>
+</head>
+<body>
+	<script type="module" src="/js/ledger/LedgerCategoryWithAccounts.js"></script>
+	<script src="/js/ledger/ledger-modal-html.js"></script>
+	<div class="toast"></div>
+	<!-- app start -->
+	<div class="app">
+		<aside th:replace="~{fragment/component/sidebar :: ASSET_SIDEBAR}"></aside>
+		<div class="app-right">
+			<div th:replace="~{fragment/component/topbar :: MAIN_TOPBAR}"></div>
+			<div class="main">
+				<div class="content-wrapper content9-3">
+					<div class="content-flex content-flex-col app-container w-full">
+						<!-- Ledger Select Dropdown -->
+						<div class="flex-col gap-m w-full">
+							<div class="flex gap-m w-full">
+								<div class="badge" data-type="PERSONAL" id="ledgerTypeBadge">
+									<span>개인 가계부</span>
+								</div>
+								<div class="dropdown-wrapper bg-main full" data-drop="ledgerSelect">
+									<div class="dropdown-trigger">
+										<span class="dropdown-text" data-selected=""></span>
+										<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+										<div class="dropdown left"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="category-card gap-m">
+							<!-- Asset Category Layer -->
+							<div class="flex-col bg-main main-border round-s">
+								<div class="card-title">
+									<div class="flex items-center gap-m">
+										<div class="card-icon asset">
+											<svg th:replace="~{fragment/svg/svg :: coin}"></svg>
+										</div>
+										<span>자산 항목</span>
+									</div>
+									<button class="btn btn-asset" data-event="categoryCreateBtn">자산 등록</button>
+								</div>
+								<div class="line"></div>
+								<div class="card-body p-m" data-block="category-asset"></div>
+							</div>
+							
+							<!-- Liabilities Category Layer -->
+							<div class="flex-col bg-main main-border round-s">
+								<div class="card-title">
+									<div class="flex items-center gap-m">
+										<div class="card-icon liabilities">
+											<svg th:replace="~{fragment/svg/svg :: liabilities}"></svg>
+										</div>
+										<span>부채 항목</span>
+									</div>
+									<button class="btn btn-liabilities" data-event="categoryCreateBtn">부채 등록</button>
+								</div>
+								<div class="line"></div>
+								<div class="card-body p-m" data-block="category-liabilities"></div>
+							</div>
+							
+							<!-- Equity Category Layer -->
+							<div class="flex-col bg-main main-border round-s">
+								<div class="card-title">
+									<div class="flex items-center gap-m">
+										<div class="card-icon equity">
+											<svg th:replace="~{fragment/svg/svg :: equity}"></svg>
+										</div>
+										<span>기초 자산 항목</span>
+									</div>
+									<button class="btn btn-neutral" data-event="categoryCreateBtn">기초 자산 등록</button>
+								</div>
+								<div class="line"></div>
+								<div class="card-body p-m" data-block="category-equity"></div>
+							</div>
+							
+							<!-- Income Category Layer -->
+							<div class="flex-col bg-main main-border round-s">
+								<div class="card-title">
+									<div class="flex items-center gap-m">
+										<div class="card-icon income">
+											<svg th:replace="~{fragment/svg/svg :: income}"></svg>
+										</div>
+										<span>수입 항목</span>
+									</div>
+									<button class="btn btn-income" data-event="categoryCreateBtn">수입 등록</button>
+								</div>
+								<div class="line"></div>
+								<div class="card-body p-m" data-block="category-income"></div>
+							</div>
+							
+							<!-- Expense Category Layer -->
+							<div class="flex-col bg-main main-border round-s">
+								<div class="card-title">
+									<div class="flex items-center gap-m">
+										<div class="card-icon expense">
+											<svg th:replace="~{fragment/svg/svg :: expense}"></svg>
+										</div>
+										<span>지출 항목</span>
+									</div>
+									<button class="btn btn-expense" data-event="categoryCreateBtn">지출 등록</button>
+								</div>
+								<div class="line"></div>
+								<div class="card-body p-m" data-block="category-expense"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Overlay -->
+	<div class="modal-overlay" tabindex="-1">
+		<div class="modal" tabindex="-1"></div>
+	</div>
+	
+	<script src="/js/modal.js"></script>
+	<script type="module" src="/js/ledger/ledger-category.js"></script>
+	<script src="/js/theme.js"></script>
+	<script src="/js/app.js"></script>
+</body>
+</html>

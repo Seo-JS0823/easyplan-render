@@ -1,0 +1,42 @@
+{
+	{
+		ledgerId: 1,
+		ledgerName: 가계부1,
+		categories: [
+			{
+				categoryId: 1,
+				categoryName: 자산,
+				accounts: [
+					{
+						accountId: 1,
+						accountName: 월급
+					},
+					{
+						accountId: 2,
+						accountName: 상여금
+					}
+				]
+			},
+			{
+				categoryId: 2,
+				categoryName: 부채,
+				accounts: [
+					{
+						accountId: 3,
+						accountName: 신용카드
+					},
+					{
+						accountId: 4,
+						accountName: 갚을 돈
+					}
+				]
+			}
+			, ...
+		]
+	},
+	{
+		ledgerId: 2,
+		ledgerName: 가계부2,
+		categories: [ {...}, {...} ]
+	}
+}

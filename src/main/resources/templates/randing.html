@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/core.css">
+  <script src="/js/modal-html.js"></script>
+  <script src="/js/util/easyplan-utilities.js"></script>
+  <title>Esayplan</title>
+</head>
+<body>
+  <div class="app">
+    <div class="app-right">
+      <header class="app-topbar full">
+        <div class="topbar-left">
+          <a href="#">
+            <img src="/images/sublogo.png">
+          </a>
+        </div>
+        <div class="topbar-right">
+          <div class="icon-box">
+            <div class="icon action" data-icon="theme"></div>
+          </div>
+         	<div class="icon-box relative">
+         		<div class="icon action" id="topbar-menu">
+	          	<svg th:replace="~{fragment/svg/svg :: menu}"></svg>
+	          	<div class="dropdown right">
+	          		<span id="modal-login">로그인</span>
+	          		<span id="modal-join">회원가입</span>
+	          	</div>
+         		</div>
+          </div>
+        </div>
+      </header>
+      <div class="main">
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" tabindex="-1">
+    <div class="modal" tabindex="-1"></div>
+  </div>
+  <div class="toast">
+  	
+  </div>
+  <script src="/js/theme.js"></script>
+  <script src="/js/unlogin.js"></script>
+  <script src="/js/modal.js"></script>
+</body>
+</html>

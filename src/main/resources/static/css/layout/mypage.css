@@ -1,0 +1,311 @@
+:root, :root[data-theme=light] {
+	--mypage-size: 70rem;
+	
+	--color-setting: #9400D3;
+	--color-activity: #1e90ff;
+}
+
+.mypage {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: 100vh;
+	z-index: var(--z-base);
+}
+
+.mypage-topbar {
+	width: var(--mypage-size);
+	display: flex;
+	margin: 0 auto;
+	justify-content: space-between;
+	padding: 0 var(--padding-m);
+}
+
+.mypage .app-topbar {
+	padding: 0;
+	justify-content: space-around;
+}
+
+.mypage .topbar-left > img {
+	width: 10rem;
+}
+
+.mypage .main {
+	padding-left: var(--padding-m);
+	padding-right: var(--padding-m);
+	align-items: center;
+}
+
+.mypage-container {
+	width: var(--mypage-size);
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-m);
+}
+
+.mypage-profile,
+.mypage-profile-info {
+	width: 100%;
+	height: auto;
+	padding: var(--padding-l);
+	background-color: var(--color-bg);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-m);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 1.2rem;
+}
+
+.profile-image {
+	position: relative;
+	width: 7rem;
+	height: 7rem;
+	aspect-ratio: 1 / 1;
+	display: flex;
+	border: 3px solid transparent;
+	background: 
+    linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+    linear-gradient(to right, #0042b6, #db7093) border-box;
+	padding: 3px;
+	border-radius: 50%;
+}
+
+.profile-image > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.profile-update {
+	position: absolute;
+	width: 2.4rem;
+	height: 2.4rem;
+	background: white;
+	border-radius: 50%;
+	border: 3px solid transparent;
+	background: 
+    linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+    linear-gradient(to right, #0042b6, #db7093) border-box;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.profile-upload > svg {
+	width: 75%;
+	height: 75%;
+	fill: gray;
+}
+
+.profile-upload {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.profile-upload input[type=file] {
+	display: none;
+}
+
+.mypage-card {
+	position: relative;
+	width: 100%;
+	transition: height var(--transition);
+}
+
+.mypage-card:has(.mypage-card-header.active) .mypage-card-dropdown {
+	height: auto;
+	border-top: 1px solid var(--color-border);
+	opacity: 1;
+	visibility: visible;
+}
+
+.mypage-card-header.active > svg {
+	transform: rotate(180deg);
+}
+
+.mypage-sub-info {
+	font-size: var(--font-size-caption-m);
+	color: var(--color-caption);
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-s);
+}
+
+.mypage-sub-info-name {
+	color: var(--color-text);
+	display: flex;
+	align-items: center;
+	gap: var(--gap-m);
+	font-size: var(--font-size-lead);
+	font-weight: 700;
+}
+
+.mypage-profile-info {
+	gap: var(--gap-m);
+	padding: 0;
+	background: none;
+	border: none;
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	align-items: start;
+}
+
+.mypage-profile-info > div:not(.mypage-profile-info > div:first-child),
+.mypage-profile-info > div:first-child > div {
+	background-color: var(--color-bg);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-m);
+	width: 100%;
+	color: var(--color-text);
+}
+
+.mypage-profile-info .input-group {
+	padding: var(--padding-m);
+}
+
+.mypage-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--gap-m);
+	color: var(--color-text);
+	padding: var(--padding-m);
+	border-top-right-radius: var(--radius-m); 
+	border-top-left-radius: var(--radius-m);
+	cursor: pointer; 
+}
+
+.mypage-card-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 4px;
+}
+.mypage-card-icon.setting {
+	color: var(--color-setting);
+	background-color: color-mix(in srgb, var(--color-setting), white 80%);
+}
+.mypage-card-icon.activity {
+	color: var(--color-activity);
+	background-color: color-mix(in srgb, var(--color-activity), white 80%);
+}
+
+.mypage-card-dropdown {
+	width: 100%;
+	height: 0;
+	opacity: 0;
+	visibility: hidden;
+}
+
+
+.profile-info-header > svg {
+	width: 20px;
+	height: 20px;
+}
+
+.profile-info-action {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: var(--gap-m);
+	padding: var(--padding-m);
+}
+
+/* Modal */
+.mypage-modal {
+	background-color: var(--modal-bg);
+  overflow: hidden;
+  border-radius: var(--radius-l); 
+}
+
+.profile-setting {
+	color: var(--color-text);
+	font-size: var(--font-size-caption-m);
+	margin-top: 2rem;
+}
+
+.profile-setting-header::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	width: calc(100% - calc(var(--padding-m) * 2));
+	height: 1px;
+	background-color: var(--color-border);
+}
+
+.profile-setting-header {
+	position: relative;
+	padding-left: var(--padding-m);
+	height: 33px;
+}
+
+.profile-setting-header > span {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: var(--color-bg);
+	padding: 0 var(--padding-m);
+	margin-left: var(--margin-l);
+}
+
+.profile-setting-body {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: var(--gap-m);
+	padding: var(--padding-l);
+}
+
+.profile-setting-group > span {
+	width: 70%;
+}
+
+@media (min-width: 350px) {
+	.mypage-container {
+		width: 100%;
+	}
+	
+	.mypage-profile {
+		flex-direction: column;
+	}
+	
+	.mypage-sub-info {
+		align-items: center;
+	}
+	
+	.mypage-profile-info {
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap-m);
+	}
+}
+
+@media (min-width: 1024px) {
+	.mypage-container {
+		width: var(--mypage-size);
+	}
+	
+	.mypage-profile {
+		flex-direction: row;
+	}
+	
+	.mypage-sub-info {
+		align-items: flex-start;
+	}
+	
+	.mypage-profile-info {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: var(--gap-m);
+	}
+}

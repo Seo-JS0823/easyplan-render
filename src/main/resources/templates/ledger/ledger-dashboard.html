@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/core.css">
+	<script src="/js/util/easyplan-utilities.js"></script>
+	<title>Easyplan</title>
+</head>
+<body>
+	<script type="module" src="/js/ledger/ledger-metadata.js"></script>
+	<script src="/js/ledger/ledger-modal-html.js"></script>
+	<div class="toast"></div>
+	
+	<!-- App Start -->
+	<div class="app">
+		<aside th:replace="~{fragment/component/sidebar :: ASSET_SIDEBAR}"></aside>
+		<div class="app-right">
+			<div th:replace="~{fragment/component/topbar :: MAIN_TOPBAR}"></div>
+			<div class="main">
+				<div class="content-wrapper content9-3">
+					<div class="content-flex content-flex-col app-container w-full">
+						<div class="flex-col gap-m w-full">
+							<div class="flex gap-m w-full">
+								<div class="badge" data-type="PERSONAL" id="ledgerTypeBadge">
+									<span>개인 가계부</span>
+								</div>
+								<div class="dropdown-wrapper bg-main full" data-drop="ledgerSelect">
+									<div class="dropdown-trigger">
+										<span class="dropdown-text" data-selected=""></span>
+										<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+										<div class="dropdown left"></div>
+									</div>
+								</div>
+							</div>
+							<div class="flex items-center between gap-m">
+								<div class="dropdown-wrapper bg-main">
+									<div class="dropdown-trigger">
+										<span class="dropdown-text">2026년 04월</span>
+										<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+										<div class="dropdown left">
+											<span class="dropdown-item">2026년 04월</span>
+											<span class="dropdown-item">2026년 03월</span>
+											<span class="dropdown-item">2026년 02월</span>
+											<span class="dropdown-item">2026년 01월</span>
+											<span class="dropdown-item">2025년 12월</span>
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-primary" id="journalCreateModal">
+									<svg th:replace="~{fragment/svg/svg :: menuAdd}"></svg>
+									<span>거래작성</span>
+								</button>
+							</div>
+						</div>
+						<div class="ledger-card-2 gap-m mt-1">
+							<div class="flex-col bg-main main-border round-s" data-card="netWorth">
+								<div class="card-title">
+									<div class="flex items-center gap-m">
+										<div class="card-icon asset">
+											<svg th:replace="~{fragment/svg/svg :: coin}"></svg>
+										</div>
+										<span>자산현황</span>
+									</div>
+									<a href="#" class="card-icon link">
+										<svg th:replace="~{fragment/svg/svg :: arrowRight}"></svg>
+									</a>
+								</div>
+								<div class="line"></div>
+								<div class="card-body h-full">
+									<div class="summary-total-section">
+										<span class="summary-total-label">순자산</span>
+										<span class="summary-total-amount"></span>
+									</div>
+									<span class="fs-caption fc-caption">자산•부채 비중</span>
+									<div class="chart asset">
+										<div class="chart-state" data-chip="asset">
+											<div class="chart-state-label">
+												<span>자산</span>
+												<span class="percent-chip"></span>
+											</div>
+											<span class="summary-state-amount"></span>
+										</div>
+										<div class="progress-container">
+											<div class="progress-fill" style="width: 70%;"></div>
+										</div>
+									</div>
+									<div class="chart liabilities">
+										<div class="chart-state" data-chip="liabilities">
+											<div class="chart-state-label">
+												<span>부채</span>
+												<span class="percent-chip"></span>
+											</div>
+											<span class="summary-state-amount"></span>
+										</div>
+										<div class="progress-container">
+											<div class="progress-fill" style="width: 30%;"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="flex-col bg-main main-border round-s" data-card="monthRank">
+								<div class="card-title">
+									<div class="flex items-center gap-m">
+										<div class="card-icon month">
+											<svg th:replace="~{fragment/svg/svg :: summary}"></svg>
+										</div>
+										<span id="currentMonthSummary">이번달 현황</span>
+									</div>
+									<a href="#" class="card-icon link">
+										<svg th:replace="~{fragment/svg/svg :: arrowRight}"></svg>
+									</a>
+								</div>
+								<div class="line"></div>
+								<div class="card-body">
+									<div class="summary-total-section-grid-2">
+										<div class="summary-total-section income">
+											<span class="summary-total-label">총 수입</span>
+											<span class="summary-total-amount"></span>
+										</div>
+										<div class="summary-total-section expense">
+											<span class="summary-total-label">총 지출</span>
+											<span class="summary-total-amount"></span>
+										</div>
+									</div>
+									<span class="fs-caption fc-caption">지출비중 3위</span>
+									<div class="chart rank-1">
+										<div class="chart-state">
+											<div class="chart-state-label">
+												<span class="categoryName"></span>
+												<span class="percent-chip"></span>
+											</div>
+											<span class="summary-state-amount"></span>
+										</div>
+										<div class="progress-container">
+											<div class="progress-fill"></div>
+										</div>
+									</div>
+									<div class="chart rank-2">
+										<div class="chart-state">
+											<div class="chart-state-label">
+												<span class="categoryName"></span>
+												<span class="percent-chip"></span>
+											</div>
+											<span class="summary-state-amount"></span>
+										</div>
+										<div class="progress-container">
+											<div class="progress-fill"></div>
+										</div>
+									</div>
+									<div class="chart rank-3">
+										<div class="chart-state">
+											<div class="chart-state-label">
+												<span class="categoryName"></span>
+												<span class="percent-chip"></span>
+											</div>
+											<span class="summary-state-amount"></span>
+										</div>
+										<div class="progress-container">
+											<div class="progress-fill"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-col w-full gap-m pt-app">
+						<div class="flex-col bg-main main-border round-s" data-card="recentExpense">
+							<div class="card-title">
+								<div class="flex items-center gap-m">
+									<div class="card-icon recent">
+										<svg th:replace="~{fragment/svg/svg :: recent}"></svg>
+									</div>
+									<span id="currentMonthSummary">최근 지출 내역</span>
+								</div>
+								<a href="#" class="card-icon link">
+									<svg th:replace="~{fragment/svg/svg :: arrowRight}"></svg>
+								</a>
+							</div>
+							<div class="line"></div>
+							<div class="card-body">
+								<div class="table"></div>
+							</div>
+						</div>
+						
+						<div class="flex-col bg-main main-border round-s" data-card="recentIncome">
+							<div class="card-title">
+								<div class="flex items-center gap-m">
+									<div class="card-icon recent">
+										<svg th:replace="~{fragment/svg/svg :: recent}"></svg>
+									</div>
+									<span id="currentMonthSummary">최근 수입 내역</span>
+								</div>
+								<a href="#" class="card-icon link">
+									<svg th:replace="~{fragment/svg/svg :: arrowRight}"></svg>
+								</a>
+							</div>
+							<div class="line"></div>
+							<div class="card-body">
+								<div class="table"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<!-- Modal -->
+	<div class="modal-overlay" tabindex="-1">
+		<div class="modal" tabindex="-1"></div>
+	</div>
+	<script src="/js/modal.js"></script>
+	<script src="/js/theme.js"></script>
+	<script src="/js/app.js"></script>
+	<script type="module" src="/js/ledger/ledger-dashboard.js"></script>
+</body>
+</html>

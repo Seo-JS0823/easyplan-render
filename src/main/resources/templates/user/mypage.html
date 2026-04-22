@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/core.css">
+	<script src="/js/util/easyplan-utilities.js"></script>
+	<title>Easyplan Developer</title>
+</head>
+<body>
+	<div class="toast"></div>
+	<!-- app start -->
+	<div class="mypage">
+    <header th:replace="~{fragment/component/topbar :: MYPAGE_TOPBAR}"></header>
+    <div class="main">
+    	<div class="mypage-container">
+    		<!-- Profile Image Layer -->
+	    	<div class="mypage-profile">
+	    		<div class="profile-image">
+	    			<img src="/images/pngwing.com.png">
+	    			<div class="profile-update">
+	    				<label class="profile-upload" for="profile-upload" data-event="profileUpload">
+		    				<svg th:replace="~{fragment/svg/svg :: addPen}"></svg>
+	    					<input type="file" id="profile-upload">
+	    				</label>
+	    			</div>
+	    		</div>
+		    	<div class="mypage-sub-info">
+		    		<div class="mypage-sub-info-name">
+		    			<span th:text="${user.nickname}">Nickname</span>
+		    			<button class="btn small" data-event="nicknameUpdate">편집</button>
+		    		</div>
+		    		<span style="font-weight: 700;">Since <span style="font-weight: normal;" th:text="${#temporals.format(since, 'yyyy.MM.dd')}">2026.03.03</span></span>
+		    	</div>
+	    	</div><!-- Profile Image Layer End -->
+	    	
+	    	<!-- Profile Info Layer -->
+	    	<div class="mypage-profile-info">
+	    		<div class="flex-col gap-m w-full">
+	    		
+	    			<div class="flex-col" style="overflow: hidden;">
+	    				<div class="mypage-card-header">
+	    					<div class="flex-row-group-m">
+		    					<div class="mypage-card-icon setting">
+			    					<svg th:replace="~{fragment/svg/svg :: userSetting}"></svg>
+		    					</div>
+		    					<span>계정 설정</span>
+		    				</div>
+		    				<button class="btn small" data-event="passwordUpdate">비밀번호 변경</button>
+	    				</div>
+	    				<div class="line"></div>
+	    				<div class="input-group">
+	    					<span>아이디 ( 변경불가 )</span>
+	    					<input class="input-readonly" type="text" th:value="${user.email}" readonly>
+	    				</div>
+	    				<div class="input-group">
+	    					<span>PID</span>
+	    					<input class="input-readonly" type="text" th:value="${user.publicId}" readonly>
+	    				</div>	
+	    			</div>
+	    			
+	    			<div class="flex-col mypage-card">
+	    				<div class="mypage-card-header active">
+	    					<div class="flex-row-group-m">
+	    						<div class="mypage-card-icon setting">
+	    							<svg th:replace="~{fragment/svg/svg :: notification}"></svg>
+	    						</div>
+	    						<span>알림 설정</span>
+	    					</div>
+	    					<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+	    				</div>
+	    				<div class="mypage-card-dropdown">
+	    					<div class="profile-setting">
+	    						<div class="profile-setting-body">
+	    							<div class="profile-setting-group flex items-center gap-m w-full">
+		    							<span>• 알림 수신</span>
+		    							<label class="toggle-switch" for="notification">
+		    								<input type="checkbox" id="notification" th:checked="${user.notification}">
+		    								<span class="slider"></span>
+		    							</label>
+		    						</div>
+		    						<div class="profile-setting-group flex items-center gap-m w-full">
+		    							<span>• 이메일 알림 수신</span>
+		    							<label class="toggle-switch" for="email-notification">
+		    								<input type="checkbox" id="email-notification" th:checked="${user.emailNotification}">
+		    								<span class="slider"></span>
+		    							</label>
+		    						</div>
+	    						</div>
+	    						<div class="profile-info-action">
+			    					<button class="btn btn-primary" id="updateSetting">알림 설정 수정</button>
+			    				</div>
+	    					</div>
+	    				</div>
+	    			</div>
+	    			
+	    			<div class="flex-col mypage-card">
+	    				<div class="mypage-card-header active">
+	    					<div class="flex-row-group-m">
+	    						<div class="mypage-card-icon setting">
+	    							<svg th:replace="~{fragment/svg/svg :: userSetting}"></svg>
+	    						</div>
+	    						<span>공개 설정</span>
+	    					</div>
+	    					<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+	    				</div>
+	    				<div class="mypage-card-dropdown">
+		    				<div class="profile-setting">
+		    					<div class="profile-setting-body">
+		    						<div class="profile-setting-group flex items-center gap-m w-full">
+		    							<span>• 내 프로필 공개</span>
+		    							<label class="toggle-switch" for="profile-public">
+		    								<input type="checkbox" id="profile-public" th:checked="${user.profilePublic}">
+		    								<span class="slider"></span>
+		    							</label>
+		    						</div>
+		    						<div class="profile-setting-group flex items-center gap-m w-full">
+		    							<span>• 친구 추가 받기</span>
+		    							<label class="toggle-switch" for="friend-request">
+		    								<input type="checkbox" id="friend-request" th:checked="${user.friendRequest}">
+		    								<span class="slider"></span>
+		    							</label>
+		    						</div>
+		    						<div class="profile-setting-group flex items-center gap-m w-full">
+		    							<span>• 친구 검색 허용</span>
+		    							<label class="toggle-switch" for="search-user">
+		    								<input type="checkbox" id="search-user" th:checked="${user.searchAllowed}">
+		    								<span class="slider"></span>
+		    							</label>
+		    						</div>
+		    					</div>
+		    					<div class="profile-info-action">
+			    					<button class="btn btn-primary" id="updateProfile">공개 설정 수정</button>
+			    				</div>
+		    				</div>
+	    				</div>
+	    			</div>
+	    			
+	    		</div>
+	    		<div>
+	    			<div class="flex-col">
+	    				<div class="mypage-card-header">
+	    					<div class="flex-row-group-m">
+	    						<div class="mypage-card-icon activity">
+	    							<svg th:replace="~{fragment/svg/svg :: activity}"></svg>
+	    						</div>
+    							<span>활동 내역</span>
+	    					</div>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+    	</div>
+    </div>
+  </div>
+  <div class="modal-overlay" tabindex="-1">
+  	<div class="modal" tabindex="-1"></div>
+  </div>
+  <script src="/js/user/user-modal-html.js"></script>
+  <script src="/js/user/mypage.js"></script>
+  <script src="/js/modal.js"></script>
+	<script src="/js/theme.js"></script>
+	<script src="/js/app.js"></script>
+</body>
+</html>

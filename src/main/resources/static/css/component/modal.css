@@ -1,0 +1,238 @@
+:root, :root[data-theme=light] {
+  --modal-overlay: rgba(33, 33, 33, 0.2);
+  --modal-bg: white;
+
+  --modal-input-border: 1px solid #dcdcdc;
+  --modal-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme=dark] {
+  --modal-overlay: rgba(33, 33, 33, 0.8);
+  --modal-bg: #121212;
+
+  --modal-input-border: 1px solid #475555;
+  --modal-shadow:
+  	0 10px 30px rgba(0, 0, 0, 0.5),
+  	0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.modal-shadow {
+	box-shadow: var(--modal-shadow);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--modal-overlay);
+  z-index: var(--z-modal-backdrop);
+}
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-overlay.open.toast .modal-toast {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.modal {
+	position: relative;
+  border-radius: var(--radius-l);
+  max-height: 90svh;
+  overflow-y: auto;
+}
+
+.modal:focus {
+	outline: none;
+}
+
+.modal > div {
+  background-color: var(--modal-bg);	
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-l);
+  padding: var(--padding-l);
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: var(--font-size-subhead);
+  border-top-left-radius: var(--radius-l);
+  border-top-right-radius: var(--radius-l);
+}
+
+.modal-body {
+	padding: var(--padding-l);
+	color: var(--color-text);
+	border-bottom-left-radius: var(--radius-l);
+	border-bottom-right-radius: var(--radius-l);
+}
+
+.modal-input-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--padding-l) * 2);
+  background: var(--modal-bg);
+}
+
+.modal-button-form-3,
+.modal-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap-m);
+  margin-top: 64px;
+}
+.modal-button-form-2,
+.modal-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-m);
+  margin-top: 64px;
+}
+.modal-button-form-1,
+.modal-grid-1 {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--gap-m);
+  margin-top: 64px;
+}
+
+.modal-grid-1,
+.modal-grid-2,
+.modal-grid-3 {
+  margin-top: 0px;
+}
+
+/* Modifier */
+.modal.modal__login {
+  width: 30rem;
+}
+.modal.modal__login .modal-header {
+  padding: 30px 0;
+}
+.modal__login--action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-container-s {
+	width: 20rem;
+	height: auto;
+	border-radius: var(--radius-l);
+}
+
+.modal-container-m {
+	width: 26rem;
+	height: auto;
+	border-radius: var(--radius-l);
+}
+
+.modal-container-l {
+	width: 32rem;
+	height: auto;
+	border-radius: var(--radius-l);
+}
+
+.modal-action {
+	display: flex;
+	gap: var(--gap-m);
+	padding: var(--padding-l);
+	align-items: center;
+	justify-content: flex-end;
+	border-bottom-left-radius: var(--radius-l);
+	border-bottom-right-radius: var(--radius-l);
+}
+
+.toast {
+	position: fixed;
+	top: 5%;
+	left: 50%;
+	background-color: var(--color-warning);
+	z-index: var(--z-toast);
+	border-radius: var(--radius-l);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	box-shadow: var(--color-shadow);
+	padding: var(--padding-l);
+	opacity: 0;
+	visibility: hidden;
+	transform: translate(-50%, -100%);
+	transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+	color: white;
+}
+
+.toast.open {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, 0%);
+}
+
+@media (min-width: 350px) {
+	.toast {
+		min-width: 90%;
+		font-size: 0.8rem;
+	}
+	
+  .modal.modal__login {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .modal.modal__login .modal-input-form {
+    padding: var(--padding-l);
+  }
+  
+  .modal {
+  	width: 90%;
+  }
+  
+  .modal-container-s, .modal-container-m, .modal-container-l {
+  	max-width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+	.toast {
+		min-width: 0px;
+		font-size: 1rem;
+	}
+	
+  .modal.modal__login {
+    width: 30rem;
+    height: auto;
+    border-radius: var(--radius-l);
+  }
+  .modal.modal__login .modal-input-form {
+    padding: calc(var(--padding-l) * 2);
+  }
+  
+  .modal {
+  	width: auto;
+  }
+  
+  .modal-container-s {
+  	width: 20rem;
+  }
+  
+  .modal-container-m {
+  	width: 26rem;
+  }
+  
+  .modal-container-l {
+  	width: 32rem;
+  }
+}

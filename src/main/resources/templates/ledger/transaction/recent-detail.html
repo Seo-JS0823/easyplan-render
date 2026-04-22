@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/core.css">
+	<script src="/js/util/easyplan-utilities.js"></script>
+	<title>Easyplan</title>
+</head>
+<body>
+	<script src="/js/ledger/ledger-modal-html.js"></script>
+	<div class="toast"></div>
+	
+	<!-- app start -->
+	<div class="app">
+		<aside th:replace="~{fragment/component/sidebar :: ASSET_SIDEBAR}"></aside>
+		<div class="app-right">
+			<div th:replace="~{fragment/component/topbar :: MAIN_TOPBAR}"></div>
+			<div class="main">
+				<div class="content-wrapper">
+					<div class="content-flex content-flex-col app-container w-full">
+						
+						<!-- Ledger Select Dropdown -->
+						<div class="flex-col gap-m w-full sticky bg-gradient">
+							<div class="flex gap-m w-full">
+								<div class="badge" data-type="PERSONAL" id="ledgerTypeBadge">
+									<span>개인 가계부</span>
+								</div>
+								<div class="dropdown-wrapper bg-main full" data-drop="ledgerSelect">
+									<div class="dropdown-trigger">
+										<span class="dropdown-text" data-selected=""></span>
+										<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+										<div class="dropdown left"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="flex p-m gap-s main-border round-s bg-main mb-flex-col-reverse">
+								<!-- 기간 데이트 피커 -->
+								<div class="flex mb-between gap-m items-center relative" style="min-width: 300px;" data-block="date-filter">
+									<div class="input-group p0 text-small">
+										<span>시작일</span>
+										<div class="datepicker-wrapper" id="startDate">
+											<button class="datepicker-trigger" data-event="startDatePickerOpen">
+												<span class="datepicker-text small" id="dateTriggerText">날짜 선택</span>
+											</button>
+											
+											<div class="datepicker right top">
+												<div class="datepicker-actions">
+													<span class="datepicker-chip" data-event="startDate-today">오늘</span>
+													<span class="datepicker-chip" data-event="startDate-currentMonth">이번 달</span>
+													<span class="btn btn-neutral small align-self-end" data-event="startDate-close" data-css-trigger="datepicker-close">닫기</span>
+												</div>
+												
+												<div class="datepicker-header">
+													<button class="datepicker-nav" type="button" data-event="startDate-prevMonthBtn" aria-label="이전 달">‹</button>
+													<div class="datepicker-title"></div>
+													<button class="datepicker-nav" type="button" data-event="startDate-nextMonthBtn" aria-label="다음 달">›</button>
+												</div>
+												
+												<div class="datepicker-weekdays">
+													<div class="datepicker-weekday">일</div>
+													<div class="datepicker-weekday">월</div>
+													<div class="datepicker-weekday">화</div>
+													<div class="datepicker-weekday">수</div>
+													<div class="datepicker-weekday">목</div>
+													<div class="datepicker-weekday">금</div>
+													<div class="datepicker-weekday">토</div>
+												</div>
+												
+												<div class="datepicker-days" id="datepickerDays"></div>
+												
+												<div class="datepicker-footer">
+													<span class="datepicker-selected-text"></span>
+													<button class="btn btn-primary small" data-event="startDate-datepickerClose">선택</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<span style="margin-top: 1rem;"> ~ </span>
+									<div class="input-group p0 text-small">
+										<span>종료일</span>
+										<div class="datepicker-wrapper" id="endDate">
+											<button class="datepicker-trigger" data-event="endDatePickerOpen">
+												<span class="datepicker-text small" id="dateTriggerText">날짜 선택</span>
+											</button>
+											
+											<div class="datepicker right top">
+												<div class="datepicker-actions">
+													<span class="datepicker-chip" data-event="endDate-today">오늘</span>
+													<span class="datepicker-chip" data-event="endDate-currentMonth">이번 달</span>
+													<span class="btn btn-neutral small align-self-end" data-event="endDate-close" data-css-trigger="datepicker-close">닫기</span>
+												</div>
+												
+												<div class="datepicker-header">
+													<button class="datepicker-nav" type="button" data-event="endDate-prevMonthBtn" aria-label="이전 달">‹</button>
+													<div class="datepicker-title"></div>
+													<button class="datepicker-nav" type="button" data-event="endDate-nextMonthBtn" aria-label="다음 달">›</button>
+												</div>
+												
+												<div class="datepicker-weekdays">
+													<div class="datepicker-weekday">일</div>
+													<div class="datepicker-weekday">월</div>
+													<div class="datepicker-weekday">화</div>
+													<div class="datepicker-weekday">수</div>
+													<div class="datepicker-weekday">목</div>
+													<div class="datepicker-weekday">금</div>
+													<div class="datepicker-weekday">토</div>
+												</div>
+												
+												<div class="datepicker-days" id="datepickerDays"></div>
+												
+												<div class="datepicker-footer">
+													<span class="datepicker-selected-text"></span>
+													<button class="btn btn-primary small" data-event="endDate-datepickerClose">선택</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- 항목 드롭다운 -->
+								<div class="flex between gap-m items-center">
+									<div class="input-group p0 text-small mb-w-full">
+										<span>조회 옵션</span>
+										<div class="dropdown-wrapper bg-main full" data-drop="searchFilterDropdown">
+											<div class="dropdown-trigger" data-selected="ALL" id="searchOption">
+												<span class="dropdown-text">전체조회</span>
+												<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+												<div class="dropdown left">
+													<span class="dropdown-item" data-value="ALL">전체조회</span>
+													<span class="dropdown-item" data-value="TRANSACTION_INCOME">수입거래</span>
+													<span class="dropdown-item" data-value="TRANSACTION_EXPENSE">지출거래</span>
+													<span class="dropdown-item" data-value="TRANSACTION_TRANSFER">이체거래</span>
+													<span class="dropdown-item" data-value="FIXED">고정거래</span>
+													<span class="dropdown-item" data-value="ASSET">자산항목</span>
+													<span class="dropdown-item" data-value="INCOME">수입항목</span>
+													<span class="dropdown-item" data-value="EQUITY">기초자산항목</span>
+													<span class="dropdown-item" data-value="LIABILITIES">부채항목</span>
+													<span class="dropdown-item" data-value="EXPENSE">지출항목</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="input-group p0 text-small mb-w-full">
+										<span>정렬</span>
+										<div class="dropdown-wrapper bg-main full" data-drop="searchSortedDropdown">
+											<div class="dropdown-trigger" data-selected="LATEST" id="sortedOption">
+												<span class="dropdown-text">최신순</span>
+												<svg th:replace="~{fragment/svg/svg :: dropdownArrowUp}"></svg>
+												<div class="dropdown left">
+													<span class="dropdown-item" data-value="LATEST">최신 순</span>
+													<span class="dropdown-item" data-value="OLDEST">오래된 순</span>
+													<span class="dropdown-item" data-value="HIGH_PRICE">금액 높은순</span>
+													<span class="dropdown-item" data-value="LOW_PRICE">금액 낮은순</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- 검색 바 -->
+								<div class="flex between gap-m items-center mb-w-full">
+									<div class="input-group p0 text-small searched w-full">
+										<span>항목 검색</span>
+										<div class="flex between gap-m items-center">
+											<input type="text" id="recentDetailSearch">
+											<button class="btn btn-primary" data-event="searchRun">검색</button>									
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 거래 내역 블록 -->
+						<div class="flex-col gap-s mt-1" data-block="journalTransaction"></div>
+						
+						<!-- 더보기 버튼 -->
+						<div class="flex w-full" data-block="load-more"></div>
+						
+					</div>
+				</div>
+			</div><!-- main finish -->
+		</div>
+	</div>
+	
+	<!-- Modal Overlay -->
+	<div class="modal-overlay" tabindex="-1">
+		<div class="modal" tabindex="-1"></div>
+	</div>
+	
+	<script src="/js/modal.js"></script>
+	<script type="module" src="/js/ledger/transaction/recentDetail.js"></script>
+	<script src="/js/theme.js"></script>
+	<script src="/js/app.js"></script>
+</body>
+</html>

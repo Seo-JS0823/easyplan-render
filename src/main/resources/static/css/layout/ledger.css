@@ -1,0 +1,131 @@
+.ledger-card-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--gap-m);
+}
+
+.entry-row {
+	display: flex;
+	gap: var(--gap-m);
+	padding: var(--padding-m) 0;
+	color: var(--color-text);
+	font-size: var(--font-size-body);
+	
+	background-color: var(--color-bg);
+	border-radius: var(--radius-s);
+	border: 1px solid var(--color-border);
+	
+	position: relative;
+	z-index: 10;
+}
+
+.entry-row:hover {
+	z-index: 1000;
+}
+
+.entry-row_update {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 0;
+	padding: var(--padding-m);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: var(--gap-l);
+}
+
+.entry-row_date {
+	font-size: var(--font-size-caption-m);
+	color: var(--color-text);
+	font-family: var(--font-content);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: var(--gap-m);
+	padding: var(--padding-s) var(--padding-m);
+}
+
+.entry-row_day {
+	font-size: var(--font-size-caption-s);
+	color: var(--color-caption);
+}
+
+.entry-row_info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: var(--font-size-caption-m);
+	color: var(--color-text);
+	font-family: var(--font-content);
+	padding: var(--padding-s) var(--padding-m);
+	min-width: calc(8rem + 20%);
+}
+
+.entry-row_info_memo {
+	color: var(--color-caption);
+	font-size: var(--font-size-caption-s);
+	min-width: 8rem;
+}
+
+.entry-row_account {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	flex-grow: 1;
+}
+
+.entry-row_account_entryline {
+	display: flex;
+	align-items: center;
+	gap: var(--gap-m);
+	font-size: var(--font-size-caption-m);
+	color: var(--color-text);
+	padding-left: 3rem;
+}
+
+.entry-row_account_entryline > span {
+	margin-bottom: 2px;
+}
+
+@media (min-width: 350px) {
+	.ledger-card-2 {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
+		align-items: flex-start;
+	}
+	
+	.entry-row {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.entry-row_account_entryline {
+		padding-left: 1rem;
+		border-top: 1px solid var(--color-border);
+		padding-top: var(--padding-m);
+	}
+	
+	.entry-row_update {
+		top: 0;
+		transform: translateY(0);
+	}
+}
+
+@media (min-width: 1024px) {
+	.ledger-card-2 {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
+		align-items: stretch;
+	}
+	
+	.entry-row {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.entry-row_account_entryline {
+		padding-left: 3rem;
+		border: none;
+		padding-top: 0px;
+	}
+}

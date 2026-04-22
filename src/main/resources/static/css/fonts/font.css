@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'Cafe24Surround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+  font-family: 'CardTitle';
+  src: url(./Moneygraphy-Rounded.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.fc-success {
+  color: var(--color-success);
+}
+
+.fc-danger {
+  color: var(--color-danger);
+}
+
+.fc-info {
+  color: var(--color-info);
+}
+
+.fc-text {
+	color: var(--color-text);
+}
+
+.fc-caption {
+	color: var(--color-caption);
+}
+
+.fs-caption {
+	font-size: var(--font-size-caption-m);
+}
+
+.fs-lead {
+	font-size: var(--font-size-lead);
+}
+
+.fs-subhead {
+	font-size: var(--font-size-subhead);
+}
+
+.fs-head {
+	font-size: var(--font-size-head);
+}
+
+.fw-bold {
+	font-weight: bold;
+}
+
+.font-component {
+	font-family: var(--font-component);
+}
+
+.font-link {
+  font-size: var(--font-size-caption-m);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.font-link:hover {
+  color: var(--color-info);
+  text-decoration: underline;
+}

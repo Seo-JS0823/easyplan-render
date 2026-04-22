@@ -1,0 +1,82 @@
+:root {
+  /* 브랜드 컬러 */
+  --color-brand: #DB7093;
+
+  /* 라이트 다크 컬러 */
+  --color-light: #ffffff;
+  --color-dark: #121212;
+	--color-lightdark: #646464;
+
+  /* 상태별 컬러 */
+  --color-success: #198754;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-neutral: #475569;
+  --color-info: #1e90ff;
+  
+  --color-bg-tooltip: #ADD8E6;
+}
+
+:root[data-theme=light] {
+  /* Text Color */
+  --color-text: #333;
+  --color-caption: #868e96;
+  
+  /* border color */
+  --color-border: rgba(12, 12, 12, 0.08);
+  --color-border-active: rgba(12, 12, 12, 0.24);
+  --color-hover: rgba(12, 12, 12, 0.04);
+  --color-shadow: 0 2px 4px rgba(12, 12, 12, 0.04);
+  
+  /* body background */
+  --color-bg: var(--color-light);
+  --color-bg-gradient: linear-gradient(180deg, #fafcfff0, #f2f6fbf2);
+  --color-bg-inner-hover: #efefef;
+  
+  /* sidebar */
+  --color-nav-text: #6b7a8b;
+  --color-nav-text-active: #15202d;
+  
+  --color-surface: color-mix(in srgb, var(--color-bg), black 2%);
+  --color-footer: #D3D3D3;
+}
+
+:root[data-theme=dark] {
+  /* Text Color */
+  --color-text: #dfdfdf;
+  --color-caption: #868e96;
+  
+  /* border color */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-active: rgba(255, 255, 255, 0.24);
+  --color-hover: rgba(255, 255, 255, 0.04);
+  --color-shadow: 0 2px 4px rgba(12, 12, 12, 0.16);
+  
+  /* body background */
+  --color-bg: var(--color-dark);
+  --color-bg-gradient: linear-gradient(180deg, rgba(18, 22, 30, 0.92), rgba(10, 12, 18, 0.96));
+  --color-bg-inner-hover: #242424;
+  
+  /* sidebar */
+  --color-nav-text: #6b7a8b;
+  --color-nav-text-active: #eef4ff;
+  
+  --color-surface: color-mix(in srgb, var(--color-bg), white 5%);
+  --color-footer: #696969;
+}
+
+.main-border {
+	border: 1px solid var(--color-border);
+}
+
+.bg-main {
+	background: var(--color-bg) !important;
+}
+
+.bg-surface {
+	background-color: var(--color-surface);
+}
+
+.bg-gradient {
+	background-image: var(--color-bg-gradient);
+}
