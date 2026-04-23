@@ -171,7 +171,7 @@ async function loginRequest() {
 		return;
 	}
 	
-	window.location.href = baseUrl + 'user/my';
+	window.location.href = baseUrl + 'ledger/dashboard';
 }
 
 async function updateNicknameRequest() {

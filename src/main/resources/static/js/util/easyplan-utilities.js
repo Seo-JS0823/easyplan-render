@@ -1,4 +1,4 @@
-const baseUrl = 'https://easyplan.onrender.com';
+const baseUrl = 'https://easyplan.onrender.com/';
 
 function csrfToken() {
 	if(document.cookie) {

@@ -58,13 +58,20 @@ public class UserView {
 		ZonedDateTime userCreatedAt = userResponse.getCreatedAt().atZone(ZoneId.of("UTC"))
 				.withZoneSameInstant(ZoneId.of(zoneId));
 		
-		model.addAttribute("user", userResponse);
-		model.addAttribute("since", userCreatedAt);
-		return "/user/mypage";
+		modelMetadata("user", model, userResponse);
+		modelMetadata("since", model, userCreatedAt);
+		return "user/mypage";
 	}
 	
 	@GetMapping("/home")
-	public String homeView() {
+	public String homeView(Model model, Authentication auth) {
+		User user = userApp.userInfo(auth.getName());
+		UserResponse userResponse = new UserResponse(user);
+		modelMetadata("user", model, userResponse);
 		return "user/home";
+	}
+	
+	private void modelMetadata(String attr, Model model, Object object) {
+		model.addAttribute(attr, object);
 	}
 }
