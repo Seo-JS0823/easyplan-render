@@ -1,6 +1,6 @@
 server:
   forward-headers-strategy: native
-  port: 8080
+  port: 10000
 
 spring:
   application:
